@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.lives {
+  font-size: 24px; /* Увеличим размер шрифта */
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif; /* Добавляем угловатый шрифт */
+}
+
+
 .container {
   width: 672px;
   margin: 0 auto;
@@ -69,10 +81,4 @@
   line-height: 32px;
 
   margin-bottom: -12px;
-}
-.lives {
-  font-size: 18px;
-  margin-left: 20px;
-  display: flex;
-  align-items: center;
 }

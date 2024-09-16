@@ -1,3 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  font-family: 'Cabin Sketch', cursive; /* Подключённый шрифт */
+  font-size: 18px;
+  color: #333;
+}
+
+.checkboxContainer input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxContainer input[type="checkbox"]:checked {
+  background-color: #4caf50;
+}
+
+.checkboxContainer input[type="checkbox"]:checked::before {
+  content: '✓';
+  font-size: 18px; /* Сделаем галочку чуть больше */
+  color: #fff;
+  font-weight: bold; /* Галочка станет толще */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Выравнивание галочки по центру */
+  font-family: 'Comic Sans MS', cursive; /* стили для галочки */
+}
+
+
 .container {
   width: 100%;
   min-height: 100%;
