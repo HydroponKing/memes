@@ -233,7 +233,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         {status === STATUS_IN_PROGRESS ? (
           <>
             {livesMode && (
-              <div className={styles.lives}>
+              <div className={`${styles.lives} ${lives === 1 ? styles.livesCritical : ""}`}>
                 <p>Жизни: {lives}</p>
               </div>
             )}

@@ -15,7 +15,7 @@
   position: relative;
   cursor: pointer;
   appearance: none;
-  background-color: #fff;
+  background-color: #c2f5ff;
   border: 2px solid #333;
   border-radius: 5px;
   transition: background-color 0.2s ease;
@@ -24,18 +24,14 @@
   align-items: center;
 }
 
-.checkboxContainer input[type="checkbox"]:checked {
-  background-color: #4caf50;
-}
-
 .checkboxContainer input[type="checkbox"]:checked::before {
   content: '✓';
-  font-size: 18px; /* Сделаем галочку чуть больше */
-  color: #fff;
+  font-size: 32px; /* Сделаем галочку чуть больше */
+  color: #004980;
   font-weight: bold; /* Галочка станет толще */
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 63%;
+  top: 18%;
   transform: translate(-50%, -50%); /* Выравнивание галочки по центру */
   font-family: 'Comic Sans MS', cursive; /* стили для галочки */
 }
