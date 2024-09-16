@@ -1,21 +1,17 @@
-// src/index.js
-
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import { GameModeContext } from "./context/GameModeContext";
+import { GameModeProvider } from "./context/GameModeContext"; // Импортируем обновленный провайдер
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 function App() {
-  const [livesMode, setLivesMode] = useState(false);
-
   return (
-    <GameModeContext.Provider value={{ livesMode, setLivesMode }}>
+    <GameModeProvider>
       <RouterProvider router={router} />
-    </GameModeContext.Provider>
+    </GameModeProvider>
   );
 }
 
