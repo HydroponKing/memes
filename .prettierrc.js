@@ -7,4 +7,5 @@ module.exports = {
   bracketSpacing: true,
   arrowParens: "avoid",
   htmlWhitespaceSensitivity: "ignore",
+  endOfLine: "auto", // для своместной разработки и с linux и с windows
 };
