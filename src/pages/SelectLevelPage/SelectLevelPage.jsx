@@ -1,5 +1,3 @@
-// src/pages/SelectLevelPage/SelectLevelPage.jsx
-
 import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
 import { useContext } from "react";
@@ -11,6 +9,7 @@ export function SelectLevelPage() {
   const handleCheckboxChange = event => {
     setLivesMode(event.target.checked);
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
@@ -36,6 +35,9 @@ export function SelectLevelPage() {
             </Link>
           </li>
         </ul>
+        <Link to="/leaderboard" className={styles.leaderboardLink}>
+          Лидерборд
+        </Link>
       </div>
     </div>
   );
