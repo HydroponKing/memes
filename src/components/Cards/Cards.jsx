@@ -2,6 +2,7 @@
 
 import { shuffle } from "lodash";
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { generateDeck } from "../../utils/cards";
 import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
@@ -172,7 +173,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   };
 
   const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
-
+  const navigate = useNavigate();
   // Инициализация игры
   useEffect(() => {
     if (status !== STATUS_PREVIEW) {
@@ -206,6 +207,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
       clearInterval(intervalId);
     };
   }, [gameStartDate, gameEndDate]);
+
+  const handleStartGame = () => {
+    navigate("/"); // Выполняем переход на главную страницу
+  };
 
   return (
     <div className={styles.container}>
@@ -253,7 +258,9 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
           />
         ))}
       </div>
-
+      <button className={styles.buttonEsc} onClick={handleStartGame}>
+        Вернуться к выбору режима
+      </button>
       {isGameEnded ? (
         <div className={styles.modalContainer}>
           <EndGameModal

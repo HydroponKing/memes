@@ -6,11 +6,13 @@
   display: flex;
   align-items: center;
   font-family: "Handjet", sans-serif;
-  color: #fff; /* По умолчанию белый цвет */
+  color: #fff;
+  /* По умолчанию белый цвет */
 }
 
 .livesCritical {
-  color: rgb(255, 55, 55); /* Красный цвет при 1 жизни */
+  color: rgb(255, 55, 55);
+  /* Красный цвет при 1 жизни */
 }
 
 
@@ -67,6 +69,7 @@
   margin-top: 34px;
   margin-bottom: 10px;
 }
+
 .previewDescription {
   font-size: 18px;
   line-height: 18px;
@@ -86,4 +89,20 @@
   line-height: 32px;
 
   margin-bottom: -12px;
+}
+
+.buttonEsc {
+  background-color: #7ac100;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: StratosSkyeng;
+  margin-top: 64px;
+}
+
+.buttonEsc:hover {
+  background-color: #45a049;
 }
