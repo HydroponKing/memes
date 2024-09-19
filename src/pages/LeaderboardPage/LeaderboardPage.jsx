@@ -10,7 +10,9 @@ export function LeaderboardPage() {
     fetch("https://wedev-api.sky.pro/api/leaderboard")
       .then(response => response.json())
       .then(data => {
-        setLeaders(data.leaders);
+        // Сортируем лидеров по времени (чем меньше время, тем выше позиция)
+        const sortedLeaders = data.leaders.sort((a, b) => a.time - b.time);
+        setLeaders(sortedLeaders);
       })
       .catch(error => {
         console.error("Ошибка при получении списка лидеров:", error);
