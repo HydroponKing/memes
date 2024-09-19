@@ -10,9 +10,19 @@ export function LeaderboardPage() {
     fetch("https://wedev-api.sky.pro/api/leaderboard")
       .then(response => response.json())
       .then(data => {
+        // Поскольку API не поддерживает level, фильтруем по времени или другому признаку
+        const thresholdForHardLevel = 30; // Порог для сложного уровня (время в секундах)
+
+        // Фильтрация по порогу времени
+        const filteredLeaders = data.leaders.filter(leader => leader.time >= thresholdForHardLevel);
+
         // Сортируем лидеров по времени (чем меньше время, тем выше позиция)
-        const sortedLeaders = data.leaders.sort((a, b) => a.time - b.time);
-        setLeaders(sortedLeaders);
+        const sortedLeaders = filteredLeaders.sort((a, b) => a.time - b.time);
+
+        // Ограничиваем список до топ 10 игроков
+        const topLeaders = sortedLeaders.slice(0, 10);
+
+        setLeaders(topLeaders);
       })
       .catch(error => {
         console.error("Ошибка при получении списка лидеров:", error);
