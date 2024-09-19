@@ -14,18 +14,26 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     const name = playerName || "Пользователь";
     const totalTime = gameDurationMinutes * 60 + gameDurationSeconds;
 
-    // Отправляем результат на сервер
+    console.log("Отправляем данные:", { name, time: totalTime });
+
+    // Отправляем данные в формате JSON
     fetch("https://wedev-api.sky.pro/api/leaderboard", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // Убираем Content-Type, так как API требует это убрать
+        // Не указываем заголовок Content-Type
       },
-      body: JSON.stringify({ name, time: totalTime }),
+      body: JSON.stringify({ name, time: totalTime }), // Преобразуем данные в JSON
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log("Лидер добавлен:", data);
-        onClick();
+        console.log("Лидер добавлен:", data); // Лог для проверки результата
+        onClick(); // Закрытие модального окна
       })
       .catch(error => {
         console.error("Ошибка при добавлении лидера:", error);

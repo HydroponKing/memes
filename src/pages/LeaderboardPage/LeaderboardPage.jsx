@@ -17,7 +17,12 @@ export function LeaderboardPage() {
 
   return (
     <div className={styles.leaderboard}>
-      <h1 className={styles.title}>Лидерборд</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Лидерборд</h1>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button}>Начать игру</button>
+        </div>
+      </div>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -36,9 +41,6 @@ export function LeaderboardPage() {
           ))}
         </tbody>
       </table>
-      <div className={styles.buttonContainer}>
-        <button className={styles.button}>Начать игру</button>
-      </div>
     </div>
   );
 }
