@@ -3,10 +3,11 @@ import styles from "./EndGameModal.module.css";
 import { Button } from "../Button/Button";
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
+import { Link } from "react-router-dom";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
   const [playerName, setPlayerName] = useState("");
-  const title = isWon ? "Вы победили!" : "Вы проиграли!";
+  const title = isWon ? "Вы попали\nна Лидерборд!" : "Вы проиграли!";
   const imgSrc = isWon ? celebrationImageUrl : deadImageUrl;
   const imgAlt = isWon ? "celebration emodji" : "dead emodji";
 
@@ -44,23 +45,26 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     <div className={styles.modal}>
       <img className={styles.image} src={imgSrc} alt={imgAlt} />
       <h2 className={styles.title}>{title}</h2>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder="Пользователь"
+        value={playerName}
+        onChange={e => setPlayerName(e.target.value)}
+      />
       <p className={styles.description}>Затраченное время:</p>
       <div className={styles.time}>
         {gameDurationMinutes.toString().padStart(2, "0")}:{gameDurationSeconds.toString().padStart(2, "0")}
       </div>
       {isWon && (
         <>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="Введите ваше имя"
-            value={playerName}
-            onChange={e => setPlayerName(e.target.value)}
-          />
           <Button onClick={handleSubmit}>Отправить результат</Button>
         </>
       )}
       {!isWon && <Button onClick={onClick}>Начать сначала</Button>}
+      <Link to="/leaderboard" className={styles.leaderboardLink}>
+        Перейти к лидерборду
+      </Link>
     </div>
   );
 }

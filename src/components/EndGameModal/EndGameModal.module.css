@@ -1,6 +1,6 @@
 .modal {
   width: 480px;
-  height: 459px;
+  height: 570px;
   border-radius: 12px;
   background: #c2f5ff;
   display: flex;
@@ -23,7 +23,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
-
+  text-align: center;
   margin-bottom: 28px;
 }
 
@@ -48,4 +48,32 @@
   line-height: 72px;
 
   margin-bottom: 40px;
+}
+.input {
+  background-color: #ffffff; /* Светло-голубой фон */
+  border: 1px solid #dcdcdc; /* Светлая рамка */
+  border-radius: 10px; /* Закругленные углы */
+  font-family: 'Arial', sans-serif; 
+  font-size: 18px; 
+  color: #000000; 
+  padding: 7px; 
+  outline: none; /* Убираем стандартную обводку */
+  width: 250px; /* Полная ширина */
+  text-align: center; /* Выравнивание плейсхолдера по центру */
+  margin-bottom: 18px;
+}
+
+.input::placeholder {
+  color: #9e9e9e; /* Цвет текста плейсхолдера */
+  font-weight: normal; /* Обычный вес шрифта для плейсхолдера */
+  text-align: center; /* Выравнивание плейсхолдера по центру */
+}
+.leaderboardLink{
+  padding-top: 18px;
+  padding-bottom: 8px;
+  font-family: StratosSkyeng;
+  font-size: 16px; /* размер шрифта */
+  color: #605bc9; /* сиреневый цвет ссылки */
+  text-decoration: underline; /* подчеркивание */
+  transition: color 0.3s ease; /* плавное изменение цвета при наведении */
 }

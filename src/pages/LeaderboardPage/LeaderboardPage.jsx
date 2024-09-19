@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "./LeaderboardPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 export function LeaderboardPage() {
   const [leaders, setLeaders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://wedev-api.sky.pro/api/leaderboard")
@@ -15,12 +17,19 @@ export function LeaderboardPage() {
       });
   }, []);
 
+  // Обработчик нажатия на кнопку
+  const handleStartGame = () => {
+    navigate("/"); // Выполняем переход на главную страницу
+  };
+
   return (
     <div className={styles.leaderboard}>
       <div className={styles.header}>
         <h1 className={styles.title}>Лидерборд</h1>
         <div className={styles.buttonContainer}>
-          <button className={styles.button}>Начать игру</button>
+          <button className={styles.button} onClick={handleStartGame}>
+            Начать игру
+          </button>
         </div>
       </div>
       <table className={styles.table}>

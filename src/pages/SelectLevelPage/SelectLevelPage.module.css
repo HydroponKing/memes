@@ -101,3 +101,12 @@
 .levelLink:visited {
   color: #0080c1;
 }
+.leaderboardLink{
+  padding-top: 18px;
+  padding-bottom: 8px;
+  font-family: StratosSkyeng;
+  font-size: 16px; /* размер шрифта */
+  color: #004980; /* сиреневый цвет ссылки */
+  text-decoration: underline; /* подчеркивание */
+  transition: color 0.3s ease; /* плавное изменение цвета при наведении */
+}
