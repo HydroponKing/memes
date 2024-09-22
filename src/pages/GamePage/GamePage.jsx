@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { Cards } from "../../components/Cards/Cards";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // Добавляем useState для супер-силы
 
 export function GamePage() {
   const { pairsCount } = useParams();
+  const [isSuperPowerUsed, setIsSuperPowerUsed] = useState(false); // Добавляем состояние для отслеживания использования супер-силы
 
-  // Пример функции для отправки результата в API
+  // Функция для отправки результата в API
   const sendResultToLeaderboard = (name, time) => {
     const result = {
       name,
@@ -15,7 +16,10 @@ export function GamePage() {
 
     fetch("https://wedev-api.sky.pro/api/leaderboard", {
       method: "POST",
-      body: JSON.stringify(result), // JSON всё ещё отправляется, но без указания заголовка
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(result), // JSON всё ещё отправляется, но теперь с заголовком
     })
       .then(response => response.json())
       .then(data => {
@@ -38,9 +42,37 @@ export function GamePage() {
     }
   }, [pairsCount]); // Этот эффект будет срабатывать при изменении количества пар
 
+  // Функция для активации супер-силы
+  const handleSuperPowerClick = () => {
+    if (!isSuperPowerUsed) {
+      setIsSuperPowerUsed(true); // Ставим флаг, что супер-сила была использована
+    }
+  };
+
   return (
     <>
-      <Cards pairsCount={parseInt(pairsCount, 10)} previewSeconds={5}></Cards>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <button
+          onClick={handleSuperPowerClick}
+          disabled={isSuperPowerUsed}
+          style={{
+            width: "50px",
+            height: "50px",
+            backgroundImage: 'url("/mnt/data/Group 1077240074.svg")',
+            backgroundSize: "cover",
+            border: "none",
+            cursor: "pointer",
+            opacity: isSuperPowerUsed ? 0.5 : 1,
+          }}
+          title="Использовать супер-силу"
+        />
+      </div>
+
+      <Cards
+        pairsCount={parseInt(pairsCount, 10)}
+        previewSeconds={5}
+        isSuperPowerUsed={isSuperPowerUsed} // Передаем состояние супер-силы в Cards
+      />
     </>
   );
 }
