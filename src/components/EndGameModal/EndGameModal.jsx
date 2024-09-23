@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "./EndGameModal.module.css";
 import { Button } from "../Button/Button";
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
 import { Link } from "react-router-dom";
+import { GameModeContext } from "../../context/GameModeContext"; // Импортируем контекст
 
-export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
+export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, isSuperPowerUsed }) {
   const [playerName, setPlayerName] = useState("");
+  const { livesMode } = useContext(GameModeContext); // Получаем данные из контекста
+
   const title = isWon ? "Вы попали\nна Лидерборд!" : "Вы проиграли!";
   const imgSrc = isWon ? celebrationImageUrl : deadImageUrl;
   const imgAlt = isWon ? "celebration emodji" : "dead emodji";
@@ -15,16 +18,21 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
     const name = playerName || "Пользователь";
     const totalTime = gameDurationMinutes * 60 + gameDurationSeconds;
 
-    console.log("Отправляем данные:", { name, time: totalTime });
+    // Определяем достижения
+    const achievements = [];
+    if (!livesMode) achievements.push(1); // Сложный уровень (без трех жизней)
+    if (!isSuperPowerUsed) achievements.push(2); // Не использовалась суперсила
 
-    // Отправляем данные в формате JSON
-    fetch("https://wedev-api.sky.pro/api/leaderboard", {
+    console.log("Отправляем данные:", { name, time: totalTime, achievements });
+
+    // Отправляем данные в формате JSON без заголовка Content-Type
+    fetch("https://wedev-api.sky.pro/api/v2/leaderboard", {
       method: "POST",
-      headers: {
-        // Убираем Content-Type, так как API требует это убрать
-        // Не указываем заголовок Content-Type
-      },
-      body: JSON.stringify({ name, time: totalTime }), // Преобразуем данные в JSON
+      body: JSON.stringify({
+        name,
+        time: totalTime,
+        achievements, // Передаем массив достижений
+      }),
     })
       .then(response => {
         if (!response.ok) {

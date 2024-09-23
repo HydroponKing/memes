@@ -1,38 +1,42 @@
 import { useState, useEffect } from "react";
 import styles from "./LeaderboardPage.module.css";
 import { useNavigate } from "react-router-dom";
+import hardlvlon from "../../components/EndGameModal/images/hardlvlon.png";
+import superpoweron from "../../components/EndGameModal/images/superpoweron.png";
 
 export function LeaderboardPage() {
   const [leaders, setLeaders] = useState([]);
   const navigate = useNavigate();
 
+  // Убедитесь, что сортировка корректная и вся информация выводится
   useEffect(() => {
-    fetch("https://wedev-api.sky.pro/api/leaderboard")
+    fetch("https://wedev-api.sky.pro/api/v2/leaderboard")
       .then(response => response.json())
       .then(data => {
-        // Поскольку API не поддерживает level, фильтруем по времени или другому признаку
-        const thresholdForHardLevel = 30; // Порог для сложного уровня (время в секундах)
+        const sortedLeaders = data.leaders.sort((a, b) => a.time - b.time).slice(0, 10); // Оставляем только топ-10 лидеров
+        console.log("Топ-10 лидеров:", sortedLeaders); // Вывод топ-10 лидеров
 
-        // Фильтрация по порогу времени
-        const filteredLeaders = data.leaders.filter(leader => leader.time >= thresholdForHardLevel);
-
-        // Сортируем лидеров по времени (чем меньше время, тем выше позиция)
-        const sortedLeaders = filteredLeaders.sort((a, b) => a.time - b.time);
-
-        // Ограничиваем список до топ 10 игроков
-        const topLeaders = sortedLeaders.slice(0, 10);
-
-        setLeaders(topLeaders);
+        setLeaders(sortedLeaders); // Устанавливаем только топ-10 лидеров
       })
       .catch(error => {
         console.error("Ошибка при получении списка лидеров:", error);
       });
   }, []);
 
-  // Обработчик нажатия на кнопку
   const handleStartGame = () => {
-    navigate("/"); // Выполняем переход на главную страницу
+    navigate("/");
   };
+
+  const renderAchievements = (achievements = []) => (
+    <div className={styles.achievements}>
+      {achievements.includes(1) && (
+        <img src={hardlvlon} alt="Hard level achievement" className={styles.achievementIcon} />
+      )}
+      {achievements.includes(2) && (
+        <img src={superpoweron} alt="Superpower achievement" className={styles.achievementIcon} />
+      )}
+    </div>
+  );
 
   return (
     <div className={styles.leaderboard}>
@@ -50,14 +54,16 @@ export function LeaderboardPage() {
             <th>Позиция</th>
             <th>Пользователь</th>
             <th>Время</th>
+            <th>Достижения</th>
           </tr>
         </thead>
         <tbody>
           {leaders.map((leader, index) => (
             <tr key={leader.id}>
-              <td>{`# ${index + 1}`}</td>
+              <td>{`#${index + 1}`}</td>
               <td>{leader.name}</td>
               <td>{formatTime(leader.time)}</td>
+              <td>{renderAchievements(leader.achievements)}</td>
             </tr>
           ))}
         </tbody>
@@ -66,7 +72,6 @@ export function LeaderboardPage() {
   );
 }
 
-// Функция для форматирования времени в минуты и секунды
 function formatTime(timeInSeconds) {
   const minutes = Math.floor(timeInSeconds / 60)
     .toString()
