@@ -13,11 +13,9 @@ export function GamePage() {
       level: pairsCount / 3, // предположим, что level = количество пар / 3
     };
 
+    // Убираем заголовок "Content-Type"
     fetch("https://wedev-api.sky.pro/api/leaderboard", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(result),
     })
       .then(response => response.json())
