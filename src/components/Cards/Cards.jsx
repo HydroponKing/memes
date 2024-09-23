@@ -83,6 +83,9 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setIsProcessing(false);
     setIsSuperPowerUsed(false);
     clearInterval(intervalId);
+
+    // Добавляем сброс жизней на начальное количество
+    setLives(initialLives);
   }
 
   const openCard = clickedCard => {
