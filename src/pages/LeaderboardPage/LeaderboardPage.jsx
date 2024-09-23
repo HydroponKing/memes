@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import styles from "./LeaderboardPage.module.css";
 import { useNavigate } from "react-router-dom";
 import hardlvlon from "../../components/EndGameModal/images/hardlvlon.png";
+import hardlvloff from "../../components/EndGameModal/images/hardlvloff.png";
 import superpoweron from "../../components/EndGameModal/images/superpoweron.png";
+import superpoweroff from "../../components/EndGameModal/images/superpoweroff.png";
 
 export function LeaderboardPage() {
   const [leaders, setLeaders] = useState([]);
@@ -29,11 +31,15 @@ export function LeaderboardPage() {
 
   const renderAchievements = (achievements = []) => (
     <div className={styles.achievements}>
-      {achievements.includes(1) && (
+      {achievements.includes(1) ? (
         <img src={hardlvlon} alt="Hard level achievement" className={styles.achievementIcon} />
+      ) : (
+        <img src={hardlvloff} alt="Hard level not achieved" className={styles.achievementIcon} />
       )}
-      {achievements.includes(2) && (
+      {achievements.includes(2) ? (
         <img src={superpoweron} alt="Superpower achievement" className={styles.achievementIcon} />
+      ) : (
+        <img src={superpoweroff} alt="Superpower not achieved" className={styles.achievementIcon} />
       )}
     </div>
   );
