@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Cards } from "../../components/Cards/Cards";
-import { useEffect, useState } from "react"; // Добавляем useState для супер-силы
+import { useEffect } from "react";
 
 export function GamePage() {
   const { pairsCount } = useParams();
-  const [isSuperPowerUsed, setIsSuperPowerUsed] = useState(false); // Добавляем состояние для отслеживания использования супер-силы
 
   // Функция для отправки результата в API
   const sendResultToLeaderboard = (name, time) => {
@@ -19,7 +18,7 @@ export function GamePage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(result), // JSON всё ещё отправляется, но теперь с заголовком
+      body: JSON.stringify(result),
     })
       .then(response => response.json())
       .then(data => {
@@ -32,7 +31,6 @@ export function GamePage() {
 
   // Пример эффекта для отправки данных при завершении игры
   useEffect(() => {
-    // Это может быть любая логика завершения игры
     const gameEnded = true; // Предположим, что игра завершена
     const playerName = "Игрок"; // Можно получить откуда-то имя игрока
     const gameTime = 120; // Время игры в секундах
@@ -40,39 +38,11 @@ export function GamePage() {
     if (gameEnded) {
       sendResultToLeaderboard(playerName, gameTime);
     }
-  }, [pairsCount]); // Этот эффект будет срабатывать при изменении количества пар
-
-  // Функция для активации супер-силы
-  const handleSuperPowerClick = () => {
-    if (!isSuperPowerUsed) {
-      setIsSuperPowerUsed(true); // Ставим флаг, что супер-сила была использована
-    }
-  };
+  }, [pairsCount]);
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <button
-          onClick={handleSuperPowerClick}
-          disabled={isSuperPowerUsed}
-          style={{
-            width: "50px",
-            height: "50px",
-            backgroundImage: 'url("/mnt/data/Group 1077240074.svg")',
-            backgroundSize: "cover",
-            border: "none",
-            cursor: "pointer",
-            opacity: isSuperPowerUsed ? 0.5 : 1,
-          }}
-          title="Использовать супер-силу"
-        />
-      </div>
-
-      <Cards
-        pairsCount={parseInt(pairsCount, 10)}
-        previewSeconds={5}
-        isSuperPowerUsed={isSuperPowerUsed} // Передаем состояние супер-силы в Cards
-      />
+      <Cards pairsCount={parseInt(pairsCount, 10)} previewSeconds={5} />
     </>
   );
 }

@@ -106,3 +106,66 @@
 .buttonEsc:hover {
   background-color: #45a049;
 }
+
+.superPowerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.superPowerButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.superPowerContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  display: none;
+  /* Скрываем по умолчанию */
+  position: absolute;
+  width: 161px;
+  height: 195px;
+  background: #C2F5FF;
+  /* Задний фон окна */
+  color: #004980;
+  /* Цвет текста */
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  padding: 10px;
+  /* Немного отступов для текста */
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* Тень для эффекта */
+  top: 100%;
+  /* Ставим под кнопку */
+  right: -80%;
+  /* Выравнивание по горизонтали */
+}
+
+.superPowerContainer:hover .tooltip {
+  display: block;
+  /* Показываем при наведении */
+}
+
+  /* Цвет слова "Прозрение" */
+.superPowerContainer:hover .tooltip .title {
+  height: 24px;
+  color: #004980;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Определим стиль для "Прозрение" */
+.title {
+  font-size: 18px;
+  padding-bottom: 18px;
+}

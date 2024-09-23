@@ -7,6 +7,7 @@ import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { GameModeContext } from "../../context/GameModeContext";
+import { ReactComponent as PowerIcon } from "../../components/EndGameModal/images/power.svg";
 
 // Константы статусов игры
 const STATUS_LOST = "STATUS_LOST";
@@ -216,9 +217,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
               </div>
             )}
             <Button onClick={resetGame}>Начать заново</Button>
-            <Button onClick={handleSuperPower} disabled={isSuperPowerUsed} className={styles.superPowerButton}>
-              Прозрение (Super Power)
-            </Button>
+            <div className={styles.superPowerContainer}>
+              <button onClick={handleSuperPower} disabled={isSuperPowerUsed} className={styles.superPowerButton}>
+                <PowerIcon width="68" height="68" />
+              </button>
+              <div className={styles.tooltip}>
+                <div className={styles.title}>Прозрение</div>
+                <p>На 5 секунд показываются все карты. Таймер длительности игры на это время останавливается.</p>
+              </div>
+            </div>
           </>
         ) : null}
       </div>
